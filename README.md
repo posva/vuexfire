@@ -104,6 +104,8 @@ to its readme for more documentation.
 You can checkout the examples by serving an `http-server` at the root of this
 project.
 
+[An example project demonstrating how to use Vue and Vuex for state management of data from Firebase](https://github.com/niallobrien/Vue-Vuex-Firebase) by [Niall O'Brien](https://twitter.com/niall_obrien)
+
 ## Support on Beerpay
 Hey dude! Help me out for a couple of :beers:!
 

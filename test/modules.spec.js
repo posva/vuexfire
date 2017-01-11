@@ -137,7 +137,7 @@ describe('Vuex Modules', function () {
     })
   })
 
-  it('binds and object in a module', function (done) {
+  it('binds an object in a module', function (done) {
     var obj = {
       first: { index: 0 },
       second: { index: 1 },

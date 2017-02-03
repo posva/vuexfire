@@ -325,38 +325,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.$firebaseRefs = null
 	    this._firebaseSources = null
 	    this._firebaseListeners = null
-	  }
-	}
-
-	const VuexFireInit = function () {
-	  const bindings = this.$options.firebase
-	  if (!bindings) return
-	  ensureRefs(this)
-	  // TODO check for bindings in store
-	  for (var key in bindings) {
-	    bind(this, key, bindings[key])
+	  },
+	  created: function () {
+	    var bindings = this.$options.firebase
+	    if (typeof bindings === 'function') bindings = bindings.call(this)
+	    if (!bindings) return
+	    ensureRefs(this)
+	    // TODO check for bindings in store
+	    for (var key in bindings) {
+	      bind(this, key, bindings[key])
+	    }
 	  }
 	}
 
 	function install (Vue) {
-	  // override init to get called after vuex
-	  const version = Number(Vue.version.split('.')[0])
-
-	  /* istanbul ignore else: Vue 1 */
-	  if (version >= 2) {
-	    Vue.mixin({ beforeCreate: VuexFireInit })
-	  } else {
-	    // override init and inject vuex init procedure
-	    // for 1.x backwards compatibility.
-	    const _init = Vue.prototype._init
-	    Vue.prototype._init = function (options) {
-	      options = options || {}
-	      options.init = options.init
-	        ? [VuexFireInit].concat(options.init)
-	        : VuexFireInit
-	      _init.call(this, options)
-	    }
-	  }
 	  Vue.mixin(VuexFireMixin)
 
 	  // use object-based merge strategy

@@ -4,14 +4,6 @@ exports.isKeyInState = function isKeyInState (state, module, key) {
     : state[key]) !== undefined
 }
 
-exports.initWithValue = function initWithValue (state, module, key, value) {
-  if (module) {
-    walkObject(state, module.split('/'))[key] = value
-  } else {
-    state[key] = value
-  }
-}
-
 exports.get = function get (state, module, key) {
   return module
     ? walkObject(state, module.split('/'))[key]

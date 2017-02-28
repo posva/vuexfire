@@ -67,6 +67,7 @@ describe('Vuex Modules', function () {
     expect(cartMutationsNames).to.include('cart/VUEXFIRE/arrayAdd')
     expect(cartMutationsNames).to.include('cart/VUEXFIRE/arrayRemove')
     expect(cartMutationsNames).to.include('cart/VUEXFIRE/arrayMove')
+    expect(cartMutationsNames).to.include('cart/VUEXFIRE/initWithValue')
 
     cartMutationsNames.forEach(function (m) {
       expect(cartMutations[m]).to.be.a('function')

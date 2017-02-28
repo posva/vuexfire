@@ -68,7 +68,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	const VUEXFIRE_ARRAY_ADD = 'VUEXFIRE/arrayAdd'
 	const VUEXFIRE_ARRAY_REMOVE = 'VUEXFIRE/arrayRemove'
 	const VUEXFIRE_ARRAY_MOVE = 'VUEXFIRE/arrayMove'
-	const INIT_WITH_VALUE = 'VUEXFIRE/initWithValue'
 
 	/**
 	 * Returns the key of a Firebase snapshot across SDK versions.
@@ -194,11 +193,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function bindAsArray (vm, fullKey, module, key, source, cancelCallback) {
 	  var state = vm.$store.state
 	  // set it as an array
-	  vm.$store.commit(utils.vuex.getMutationName(module, INIT_WITH_VALUE), {
-	    key: key,
-	    value: [],
-	    module: module
-	  })
+	  utils.vuex.initWithValue(state, module, key, [])
 
 	  const onAdd = source.on('child_added', function (snapshot, prevKey) {
 	    const array = utils.vuex.get(state, module, key)
@@ -388,14 +383,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  array.splice(payload.newIndex, 0, array.splice(payload.index, 1)[0])
 	}
 
-	install.mutations[INIT_WITH_VALUE] = function (state, payload) {
-	  if (payload.module) {
-	    utils.walkObject(state, payload.module.split('/'))[payload.key] = payload.value
-	  } else {
-	    state[payload.key] = payload.value
-	  }
-	}
-
 	/**
 	 * Setup mutations for a module (Vuex 2)
 	 *
@@ -479,6 +466,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return (module
 	    ? walkObject(state, module.split('/'))[key]
 	    : state[key]) !== undefined
+	}
+
+	exports.initWithValue = function initWithValue (state, module, key, value) {
+	  if (module) {
+	    walkObject(state, module.split('/'))[key] = value
+	  } else {
+	    state[key] = value
+	  }
 	}
 
 	exports.get = function get (state, module, key) {

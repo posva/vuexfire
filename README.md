@@ -30,7 +30,7 @@ Supports:
 2. In module environments, e.g CommonJS:
 
   ``` bash
-  npm install vue firebase vuexfire --save
+  npm install vue vuex firebase vuexfire --save
   ```
 
   ``` js

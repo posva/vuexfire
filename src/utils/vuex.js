@@ -16,10 +16,15 @@ exports.getMutationName = function getMutationName (module, mutation) {
     : mutation
 }
 
-exports.initModuleKeyInState = function initModuleKeyInState (state, module) {
-  return state = module
-    ? walkObject(state, module.split('/'))
-    : state
+exports.getModuleState = function getModuleState (state, module) {
+  if (module) {
+    module.split('/').reduce(function (target, key) {
+      target[key] = {}
+      return target[key]
+    }, state)
+  }
+
+  return state
 }
 
 function walkObject (obj, keys) {

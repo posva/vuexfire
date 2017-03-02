@@ -131,13 +131,11 @@ function bind (vm, fullKey, source) {
 function bindAsArray (vm, fullKey, module, key, source, cancelCallback) {
   var state = vm.$store.state
 
-  // need to set up module keys in the state
-  utils.vuex.initModuleKeyInState(state, module)
-
   // set it as an array
   vm.$store.commit(utils.vuex.getMutationName(module, VUEXFIRE_INIT_WITH_VALUE), {
     key: key,
-    value: []
+    value: [],
+    module: module
   })
 
   const onAdd = source.on('child_added', function (snapshot, prevKey) {
@@ -329,7 +327,7 @@ install.mutations[VUEXFIRE_ARRAY_MOVE] = function (state, payload) {
 }
 
 install.mutations[VUEXFIRE_INIT_WITH_VALUE] = function (state, payload) {
-  state[payload.key] = payload.value
+  utils.vuex.getModuleState(state, payload.module)[payload.key] = payload.value
 }
 
 /**

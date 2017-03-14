@@ -104,13 +104,13 @@ new Vue({
 
 In larger applications you may consider splitting up your store
 into [modules](http://vuex.vuejs.org/en/modules.html). If that's your case you
-can use module with vuexfire by using a dot separated key like `cart.items` or
-`user.cart.items`. You must use the `moduleMutations()` method to generate the
-mutations for your module
+have two options:
 
+- Use the `namespaced` option:
 ``` js
   // Define a module
   var cart = {
+    namespaced: true,
     state: {
       items: null // Initialize the variable
     },
@@ -121,7 +121,7 @@ mutations for your module
       },
       items: function (state) { return state.items }
     },
-    mutations: VuexFire.moduleMutations('cart') // This is the name given to the store
+    mutations: VuexFire.mutations // They will get prefixed by cart/
   }
 
   // Create the store
@@ -131,6 +131,19 @@ mutations for your module
     }
   }
 
+  // Make sure to refer to the cart module when binding
+  vm.$bindAsArray('cart.items', itemsRef)
+```
+- Namespace the mutations manually with the `moduleMutations` helper:
+``` js
+  var cart = {
+    // Everything else is the same
+    namespaced: false,
+    mutations: VuexFire.moduleMutations('cart') // This is the name given to the store
+  }
+
+  // Make sure to refer to the cart module when binding
+  vm.$bindAsArray('cart.items', itemsRef)
 ```
 
 Everything else works just as [vuefire](https://github.com/vuejs/vuefire). Refer

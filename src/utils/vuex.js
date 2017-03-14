@@ -4,14 +4,6 @@ exports.isKeyInState = function isKeyInState (state, module, key) {
     : state[key]) !== undefined
 }
 
-exports.initWithValue = function initWithValue (state, module, key, value) {
-  if (module) {
-    walkObject(state, module.split('/'))[key] = value
-  } else {
-    state[key] = value
-  }
-}
-
 exports.get = function get (state, module, key) {
   return module
     ? walkObject(state, module.split('/'))[key]
@@ -22,6 +14,17 @@ exports.getMutationName = function getMutationName (module, mutation) {
   return module
     ? module + '/' + mutation
     : mutation
+}
+
+exports.getModuleState = function getModuleState (state, module) {
+  if (module) {
+    module.split('/').reduce(function (target, key) {
+      target[key] = {}
+      return target[key]
+    }, state)
+  }
+
+  return state
 }
 
 function walkObject (obj, keys) {

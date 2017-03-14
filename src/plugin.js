@@ -5,6 +5,7 @@ const VUEXFIRE_ARRAY_CHANGE = 'VUEXFIRE/arrayChange'
 const VUEXFIRE_ARRAY_ADD = 'VUEXFIRE/arrayAdd'
 const VUEXFIRE_ARRAY_REMOVE = 'VUEXFIRE/arrayRemove'
 const VUEXFIRE_ARRAY_MOVE = 'VUEXFIRE/arrayMove'
+const VUEXFIRE_INIT_WITH_VALUE = 'VUEXFIRE/initWithValue'
 
 /**
  * Returns the key of a Firebase snapshot across SDK versions.
@@ -129,8 +130,13 @@ function bind (vm, fullKey, source) {
  */
 function bindAsArray (vm, fullKey, module, key, source, cancelCallback) {
   var state = vm.$store.state
+
   // set it as an array
-  utils.vuex.initWithValue(state, module, key, [])
+  vm.$store.commit(utils.vuex.getMutationName(module, VUEXFIRE_INIT_WITH_VALUE), {
+    key: key,
+    value: [],
+    module: module
+  })
 
   const onAdd = source.on('child_added', function (snapshot, prevKey) {
     const array = utils.vuex.get(state, module, key)
@@ -318,6 +324,10 @@ install.mutations[VUEXFIRE_ARRAY_REMOVE] = function (state, payload) {
 install.mutations[VUEXFIRE_ARRAY_MOVE] = function (state, payload) {
   const array = state[payload.key]
   array.splice(payload.newIndex, 0, array.splice(payload.index, 1)[0])
+}
+
+install.mutations[VUEXFIRE_INIT_WITH_VALUE] = function (state, payload) {
+  utils.vuex.getModuleState(state, payload.module)[payload.key] = payload.value
 }
 
 /**

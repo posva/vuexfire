@@ -130,7 +130,14 @@ function bind (vm, fullKey, source) {
 function bindAsArray (vm, fullKey, module, key, source, cancelCallback) {
   var state = vm.$store.state
   // set it as an array
-  utils.vuex.initWithValue(state, module, key, [])
+  if (module) {
+    utils.vuex.initWithValue(state, module, key, [])
+  } else {
+    vm.$store.commit(utils.vuex.getMutationName(module, VUEXFIRE_OBJECT_VALUE), {
+      key: key,
+      record: []
+    })
+  }
 
   const onAdd = source.on('child_added', function (snapshot, prevKey) {
     const array = utils.vuex.get(state, module, key)

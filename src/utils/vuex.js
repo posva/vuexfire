@@ -7,8 +7,6 @@ exports.isKeyInState = function isKeyInState (state, module, key) {
 exports.initWithValue = function initWithValue (state, module, key, value) {
   if (module) {
     walkObject(state, module.split('/'))[key] = value
-  } else {
-    state[key] = value
   }
 }
 

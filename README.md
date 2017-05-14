@@ -38,7 +38,7 @@ const store = new Vuex.Store({
 })
 ```
 
-It works with modules as well, but **you don't need to add the mutations there**:
+It works with modules as well, but **you don't need to add the mutations there** (unless the module is namespaced):
 ```js
 const store = new Vuex.Store({
   modules: {

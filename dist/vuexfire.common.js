@@ -79,8 +79,23 @@ function createRecord (snapshot) {
   return res
 }
 
+/**
+ * Find index
+ *
+ * @param {Array} array
+ * @param {Object} record
+ * @return {Number}
+ */
+function findIndexWithRecord (array, record) {
+  return array.findIndex(function (r) {
+    if (isObject(r)) {
+      return r['.key'] === record['.key']
+    }
+    return r === record
+  })
+}
+
 var VUEXFIRE_OBJECT_VALUE = 'vuexfire/OBJECT_VALUE';
-var VUEXFIRE_ARRAY_INITIALIZE = 'VUEXFIRE_ARRAY_INITIALIZE';
 var VUEXFIRE_ARRAY_ADD = 'vuexfire/ARRAY_ADD';
 var VUEXFIRE_ARRAY_CHANGE = 'vuexfire/ARRAY_CHANGE';
 var VUEXFIRE_ARRAY_MOVE = 'vuexfire/ARRAY_MOVE';
@@ -89,7 +104,6 @@ var VUEXFIRE_ARRAY_REMOVE = 'vuexfire/ARRAY_REMOVE';
 
 var types = Object.freeze({
 	VUEXFIRE_OBJECT_VALUE: VUEXFIRE_OBJECT_VALUE,
-	VUEXFIRE_ARRAY_INITIALIZE: VUEXFIRE_ARRAY_INITIALIZE,
 	VUEXFIRE_ARRAY_ADD: VUEXFIRE_ARRAY_ADD,
 	VUEXFIRE_ARRAY_CHANGE: VUEXFIRE_ARRAY_CHANGE,
 	VUEXFIRE_ARRAY_MOVE: VUEXFIRE_ARRAY_MOVE,
@@ -103,17 +117,20 @@ mutations[VUEXFIRE_OBJECT_VALUE] = function (state, ref) {
 
     state[key] = record;
   };
-mutations[VUEXFIRE_ARRAY_INITIALIZE] = function (state, ref) {
-    var key = ref.key;
-
-    state[key] = [];
-  };
 mutations[VUEXFIRE_ARRAY_ADD] = function (state, ref) {
     var key = ref.key;
     var index = ref.index;
+    var initArray = ref.initArray;
     var record = ref.record;
 
-    state[key].splice(index, 0, record);
+    if (initArray.length < 1) {
+      state[key].splice(index, 0, record);
+      return
+    }
+    var initRecordIndex = findIndexWithRecord(initArray, record);
+    initArray.splice(initRecordIndex, 1);
+    index = findIndexWithRecord(state[key], record);
+    state[key].splice(index, 1, record);
   };
 mutations[VUEXFIRE_ARRAY_CHANGE] = function (state, ref) {
     var key = ref.key;
@@ -177,12 +194,7 @@ function bindAsArray (ref) {
   var commit = ref.commit;
   var state = ref.state;
 
-  // Initialise the array to an empty one
-  commit(VUEXFIRE_ARRAY_INITIALIZE, {
-    type: VUEXFIRE_ARRAY_INITIALIZE,
-    state: state,
-    key: key,
-  }, commitOptions);
+  var initArray = [].concat(state[key]);
   var onAdd = source.on('child_added', function (snapshot, prevKey) {
     var array = state[key];
     var index = prevKey ? indexForKey(array, prevKey) + 1 : 0;
@@ -191,6 +203,7 @@ function bindAsArray (ref) {
       state: state,
       key: key,
       index: index,
+      initArray: initArray,
       record: createRecord(snapshot),
     }, commitOptions);
   }, cancelCallback);

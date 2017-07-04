@@ -48,3 +48,19 @@ export function createRecord (snapshot) {
   res['.key'] = getKey(snapshot)
   return res
 }
+
+/**
+ * Find index
+ *
+ * @param {Array} array
+ * @param {Object} record
+ * @return {Number}
+ */
+export function findIndexWithRecord (array, record) {
+  return array.findIndex(r => {
+    if (isObject(r)) {
+      return r['.key'] === record['.key']
+    }
+    return r === record
+  })
+}

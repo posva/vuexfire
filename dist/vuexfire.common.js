@@ -87,12 +87,7 @@ function createRecord (snapshot) {
  * @return {Number}
  */
 function findIndexWithRecord (array, record) {
-  return array.findIndex(function (r) {
-    if (isObject(r)) {
-      return r['.key'] === record['.key']
-    }
-    return r === record
-  })
+  return array.findIndex(function (value) { return !!value['.key'] && value['.key'] === record['.key']; })
 }
 
 var VUEXFIRE_OBJECT_VALUE = 'vuexfire/OBJECT_VALUE';

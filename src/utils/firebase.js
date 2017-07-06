@@ -57,10 +57,5 @@ export function createRecord (snapshot) {
  * @return {Number}
  */
 export function findIndexWithRecord (array, record) {
-  return array.findIndex(r => {
-    if (isObject(r)) {
-      return r['.key'] === record['.key']
-    }
-    return r === record
-  })
+  return array.findIndex(value => !!value['.key'] && value['.key'] === record['.key'])
 }

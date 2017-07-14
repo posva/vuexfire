@@ -48,12 +48,7 @@ function bindAsArray ({
   commit,
   state,
 }) {
-  // Initialise the array to an empty one
-  commit(types.VUEXFIRE_ARRAY_INITIALIZE, {
-    type: types.VUEXFIRE_ARRAY_INITIALIZE,
-    state,
-    key,
-  }, commitOptions)
+  const initArray = [].concat(state[key])
   const onAdd = source.on('child_added', function (snapshot, prevKey) {
     const array = state[key]
     const index = prevKey ? indexForKey(array, prevKey) + 1 : 0
@@ -62,6 +57,7 @@ function bindAsArray ({
       state,
       key,
       index,
+      initArray,
       record: createRecord(snapshot),
     }, commitOptions)
   }, cancelCallback)

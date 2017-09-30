@@ -92,5 +92,6 @@
     "vue": "^2.4.2",
     "vuex": "^2.4.0",
     "yarn-or-npm": "^2.0.4"
-  }
+  },
+  "types": "src/index.d.ts"
 }

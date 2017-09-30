@@ -11,7 +11,7 @@ export declare namespace VuexFire {
         wait?: Boolean;
     }
     interface ActionContext<S, R> extends Vuex.ActionContext<S, R> {
-        bindFirebaseRef: (key: string, source: firebase.database.Reference, options: BindOptions) => void;
+        bindFirebaseRef: (key: string, source: firebase.database.Reference, options?: BindOptions) => void;
         unbindFirebaseRef: (key: string) => void;
     }
 }

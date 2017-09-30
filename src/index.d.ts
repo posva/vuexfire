@@ -1,14 +1,12 @@
 import * as Vuex from 'vuex';
 import * as firebase from 'firebase';
-export declare const firebaseMutations: {
-    [key: string]: any;
-};
+export declare const firebaseMutations: Record<string, any>;
 export declare namespace VuexFire {
     interface BindOptions {
         cancelCallback?: Function;
         readyCallback?: ((a: firebase.database.DataSnapshot, b?: string | undefined) => any);
         errorCallback?: Function;
-        wait?: Boolean;
+        wait?: boolean;
     }
     interface ActionContext<S, R> extends Vuex.ActionContext<S, R> {
         bindFirebaseRef: (key: string, source: firebase.database.Reference, options?: BindOptions) => void;

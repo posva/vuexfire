@@ -15,4 +15,4 @@ export declare namespace VuexFire {
         unbindFirebaseRef: (key: string) => void;
     }
 }
-export declare function firebaseAction(action: (context: VuexFire.ActionContext<any, any>, payload: any) => any): (context: VuexFire.ActionContext<any, any>, payload: any) => any;
+export declare function firebaseAction<S, R>(action: (context: VuexFire.ActionContext<S, R>, payload: any) => any): (context: Vuex.ActionContext<S, R>, payload: any) => any;

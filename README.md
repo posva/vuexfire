@@ -1,4 +1,5 @@
 # VuexFire [![Build Status](https://img.shields.io/circleci/project/posva/vuexfire/master.svg)](https://circleci.com/gh/posva/vuexfire) [![npm package](https://img.shields.io/npm/v/vuexfire.svg)](https://www.npmjs.com/package/vuexfire) [![coverage](https://img.shields.io/codecov/c/github/posva/vuexfire/master.svg)](https://codecov.io/github/posva/vuexfire) ![size](http://img.badgesize.io/posva/vuexfire/master/dist/vuexfire.min.js.svg?compression=gzip)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fposva%2Fvuexfire.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fposva%2Fvuexfire?ref=badge_shield)
 
 > SSR ready Firebase binding for [Vuex](https://github.com/vuejs/vuex)
 
@@ -143,6 +144,9 @@ Unbinds a bound firebase reference to a given property in the state.
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fposva%2Fvuexfire.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fposva%2Fvuexfire?ref=badge_large)
 
 ## Support on Beerpay
 Hey dude! Help me out for a couple of :beers:!

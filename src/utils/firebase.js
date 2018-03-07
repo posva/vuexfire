@@ -41,6 +41,9 @@ export function getRef (refOrQuery) {
  * @return {Object}
  */
 export function createRecord (snapshot) {
+  if (!snapshot.exists()) {
+    return null
+  }
   var value = snapshot.val()
   var res = isObject(value)
     ? value

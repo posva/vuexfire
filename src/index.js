@@ -333,11 +333,14 @@ function unbind ({
   commit,
   key,
 }) {
-  let sub = subscriptions.get(commit)
-  if (!sub) return
-  // TODO dev check before
-  sub[key]()
-  delete sub[key]
+  return new Promise((resolve) => {
+    let sub = subscriptions.get(commit)
+    if (!sub) return resolve()
+    if (typeof sub[key] !== 'function') return resolve()
+    sub[key]()
+    delete sub[key]
+    return resolve()
+  })
 }
 
 export function firebaseAction (action) {

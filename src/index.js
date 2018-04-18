@@ -336,7 +336,7 @@ function unbind ({
   return new Promise((resolve) => {
     let sub = subscriptions.get(commit)
     if (!sub) return resolve()
-    if (typeof sub[key] != 'function') return resolve()
+    if (typeof sub[key] !== 'function') return resolve()
     sub[key]()
     delete sub[key]
     return resolve()

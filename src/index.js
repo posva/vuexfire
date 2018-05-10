@@ -335,7 +335,7 @@ function unbind ({
 }) {
   let sub = subscriptions.get(commit)
   if (!sub) return
-  // TODO dev check before
+  if (typeof sub != "function") return
   sub[key]()
   delete sub[key]
 }

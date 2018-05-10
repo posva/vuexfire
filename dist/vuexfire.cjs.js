@@ -457,8 +457,7 @@ function unbind (ref) {
 
   var sub = subscriptions.get(commit);
   if (!sub) { return }
-  if (typeof v != "function") { return }
-  // TODO dev check before
+  if (typeof sub != "function") { return }
   sub[key]();
   delete sub[key];
 }

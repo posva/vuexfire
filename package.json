@@ -84,7 +84,7 @@
     "firebase-mock": "^1.1.5",
     "mkdirp": "^0.5.1",
     "npm-watch": "^0.3.0",
-    "nyc": "^11.1.0",
+    "nyc": "^12.0.1",
     "rimraf": "^2.6.1",
     "rollup": "^0.58.0",
     "rollup-plugin-buble": "^0.19.1",

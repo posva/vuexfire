@@ -40,17 +40,18 @@ const store = new Vuex.Store({
 })
 ```
 
-It works with modules as well, but **you don't need to add the mutations there**:
+It works with modules as well, but **you don't need to add the mutations there, only add them in the root `Store`**:
 ```js
 const store = new Vuex.Store({
   modules: {
-    todos: {
+    cart: {
       state: {
-        todos: [], // Will be bound as an array
+        products: [], // Will be bound as an array
         user: null // Will be bound as an object
-      },
+      }
     }
-  }
+  },
+  mutations: firebaseMutations
 })
 ```
 

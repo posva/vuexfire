@@ -63,11 +63,11 @@ context, `bindFirebaseRef` and `unbindFirebaseRef`:
 import { firebaseAction } from 'vuexfire'
 
 const setTodosRef = firebaseAction(({ bindFirebaseRef, unbindFirebaseRef }, { ref }) => {
-  // bunding will automatically unbind any previously bound ref so you
+  // binding will automatically unbind any previously bound ref so you
   // don't need to unbind before binding over an existing bound key
   bindFirebaseRef('todos', ref)
   // it is possible to unbind a bound key at any time
-  unbindFirebaseRef('todos')
+  unbindFirebaseRef('user')
 })
 ```
 

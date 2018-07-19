@@ -44,7 +44,8 @@
     "opinionated"
   ],
   "peerDependencies": {
-    "firebase": ">= 4.0.0"
+    "firebase": ">= 4.0.0",
+    "vue": "*"
   },
   "author": {
     "name": "Eduardo San Martin Morote",

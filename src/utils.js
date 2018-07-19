@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export function createSnapshot (doc) {
   // defaults everything to false, so no need to set
   return Object.defineProperty(doc.data(), 'id', {
@@ -65,5 +67,5 @@ export function walkSet (obj, path, value) {
   // global isFinite is different from Number.isFinite
   // it converts values to numbers
   if (isFinite(key)) target.splice(key, 1, value)
-  else target[key] = value
+  else Vue.set(target, key, value)
 }

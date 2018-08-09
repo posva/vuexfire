@@ -78,7 +78,7 @@ const Component = {
   template: '<div>{{ todos }}</div>',
   computed: Vuex.mapState(['todos']),
   created () {
-    this.$store.dispatch('setTodosRef', db.ref('todos'))
+    this.$store.dispatch('setTodosRef', { ref: db.ref('todos') })
   }
 }
 ```

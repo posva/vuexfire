@@ -80,7 +80,7 @@
     "eslint": "^4.6.0",
     "eslint-config-posva": "^1.3.0",
     "eslint-plugin-ava": "^4.2.2",
-    "firebase": "^4.3.0",
+    "firebase": "^5.0.4",
     "firebase-mock": "^1.1.5",
     "mkdirp": "^0.5.1",
     "npm-watch": "^0.3.0",

@@ -11,13 +11,13 @@ If you need an older version check the `v1` branch: `npm i -D vuexfire@v1`
 
 1. Using a CDN:
 
-``` html
+```html
 <script src="https://unpkg.com/vuexfire"></script>
 ```
 
 2. In module environments, e.g CommonJS:
 
-``` bash
+```bash
 npm install vue firebase vuexfire --save
 ```
 
@@ -26,32 +26,33 @@ npm install vue firebase vuexfire --save
 Add the mutations to your root Store and make sure to define the property you
 want to bind in the state first:
 
-``` js
+```js
 import { firebaseMutations } from 'vuexfire'
 const store = new Vuex.Store({
   state: {
     todos: [], // Will be bound as an array
-    user: null // Will be bound as an object
+    user: null, // Will be bound as an object
   },
   mutations: {
     // your mutations
-    ...firebaseMutations
-  }
+    ...firebaseMutations,
+  },
 })
 ```
 
 It works with modules as well, but **you don't need to add the mutations there, only add them in the root `Store`**:
+
 ```js
 const store = new Vuex.Store({
   modules: {
     cart: {
       state: {
         products: [], // Will be bound as an array
-        user: null // Will be bound as an object
-      }
-    }
+        user: null, // Will be bound as an object
+      },
+    },
   },
-  mutations: firebaseMutations
+  mutations: firebaseMutations,
 })
 ```
 
@@ -77,9 +78,9 @@ Access it as a usual piece of the state:
 const Component = {
   template: '<div>{{ todos }}</div>',
   computed: Vuex.mapState(['todos']),
-  created () {
+  created() {
     this.$store.dispatch('setTodosRef', { ref: db.ref('todos') })
-  }
+  },
 }
 ```
 
@@ -135,6 +136,24 @@ another reference bound to the same property, it unbinds it first.
 }
 ```
 
+```js
+bindFirebaseRef('todos', ref, {
+  cancelCallback: (cancel) => {
+    // :TODOS
+    // cancel is a value of cancelCallback
+  },
+  readyCallback: (ready) => {
+    // :TODOS
+    // ready is a value of readyCallback
+  },
+  errorCallback: (error) => {
+    // :TODOS
+    // error is a value of errorCallback
+  },
+  wait: true,
+})
+```
+
 `wait` can be set to true every time. It's useful to do pagination and SSR.
 
 ### unbindFirebaseRef(key)
@@ -148,6 +167,7 @@ Unbinds a bound firebase reference to a given property in the state.
 [MIT](http://opensource.org/licenses/MIT)
 
 ## Support on Beerpay
+
 Hey dude! Help me out for a couple of :beers:!
 
-[![Beerpay](https://beerpay.io/posva/vuexfire/badge.svg?style=beer-square)](https://beerpay.io/posva/vuexfire)  [![Beerpay](https://beerpay.io/posva/vuexfire/make-wish.svg?style=flat-square)](https://beerpay.io/posva/vuexfire?focus=wish)
+[![Beerpay](https://beerpay.io/posva/vuexfire/badge.svg?style=beer-square)](https://beerpay.io/posva/vuexfire) [![Beerpay](https://beerpay.io/posva/vuexfire/make-wish.svg?style=flat-square)](https://beerpay.io/posva/vuexfire?focus=wish)

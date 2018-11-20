@@ -1,3 +1,7 @@
+This package has been moved to [vuejs/vuefire](https://github.com/vuejs/vuefire/tree/lerna/packages/vuexfire).
+
+---
+
 # VuexFire [![Build Status](https://img.shields.io/circleci/project/posva/vuexfire/master.svg)](https://circleci.com/gh/posva/vuexfire) [![npm package](https://img.shields.io/npm/v/vuexfire.svg)](https://www.npmjs.com/package/vuexfire) [![coverage](https://img.shields.io/codecov/c/github/posva/vuexfire/master.svg)](https://codecov.io/github/posva/vuexfire) ![size](http://img.badgesize.io/posva/vuexfire/master/dist/vuexfire.min.js.svg?compression=gzip)
 
 > SSR ready Firebase binding for [Vuex](https://github.com/vuejs/vuex)

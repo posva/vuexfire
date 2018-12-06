@@ -1,4 +1,4 @@
-This package has been moved to [vuejs/vuefire](https://github.com/vuejs/vuefire/tree/lerna/packages/vuexfire).
+This package has been moved to [vuejs/vuefire](https://github.com/vuejs/vuefire/tree/master/packages/vuexfire).
 
 ---
 
